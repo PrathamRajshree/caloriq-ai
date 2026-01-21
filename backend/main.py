@@ -16,7 +16,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ML_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "..", "ml"))
 sys.path.append(ML_DIR)
 
-from calorie_data import CALORIE_DB
+from ml.calorie_data import CALORIE_DB
+
 
 # ==========================
 # FASTAPI INIT
@@ -31,7 +32,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MODEL_PATH = os.path.join(ML_DIR, "caloriq_food_model_v2.h5")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "ml", "caloriq_food_model_v2.h5")
 DATA_DIR = os.path.join(ML_DIR, "data", "processed", "train")
 IMAGE_SIZE = (224, 224)
 
