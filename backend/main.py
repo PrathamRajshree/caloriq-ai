@@ -7,8 +7,6 @@ from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 
-# ✅ Correct Gemini SDK
-import google.generativeai as genai
 
 # ==========================
 # GEMINI API KEY (HARDCODED)
@@ -103,6 +101,13 @@ async def predict(
 @app.post("/chat")
 async def chat(message: str = Form(...)):
     try:
+        import google.generativeai as genai
+        import os
+
+        genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+
+        model = genai.GenerativeModel("gemini-1.5-flash-002")
+
         prompt = f"""
 You are Caloriq AI, a nutrition expert.
 Answer clearly, practically, and simply.
@@ -110,15 +115,12 @@ Answer clearly, practically, and simply.
 User question:
 {message}
 """
+        response = model.generate_content(prompt)
 
-        response = gemini_model.generate_content(prompt)
-
-        return {
-            "reply": response.text.strip()
-        }
+        return {"reply": response.text.strip()}
 
     except Exception as e:
-        print("❌ Gemini error:", e)
+        print("Gemini error:", e)
         return {
-            "reply": "⚠️ Gemini is currently unavailable. Please try again shortly."
+            "reply": "⚠️ AI chat temporarily unavailable."
         }
