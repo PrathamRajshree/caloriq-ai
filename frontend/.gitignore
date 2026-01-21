@@ -1,0 +1,35 @@
+# ======================
+# Node / Frontend
+# ======================
+node_modules/
+dist/
+dist-ssr/
+
+# ======================
+# Python
+# ======================
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ======================
+# ML (IMPORTANT)
+# ======================
+*.h5
+*.hdf5
+ml/data/
+ml/notebooks/
+
+# ======================
+# Environment / Secrets
+# ======================
+.env
+.env.local
+
+# ======================
+# OS / Editor
+# ======================
+.DS_Store
+.vscode/
+.idea/
