@@ -8,12 +8,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 
 
-# ==========================
-# GEMINI API KEY (HARDCODED)
-# ==========================
-genai.configure(
-    api_key=""
-)
 
 # ==========================
 # PATH FIX
